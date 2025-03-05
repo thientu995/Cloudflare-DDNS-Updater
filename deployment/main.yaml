@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cloudflare-ddns-updater-k8s-cronjob
+  namespace: cloudflare-ddns-updater-k8s
+  labels:
+    app: cloudflare-ddns-updater-k8s-cronjob
+spec:
+  serviceName: cloudflare-ddns-updater-k8s-cronjob
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflare-ddns-updater-k8s-cronjob
+  template:
+    metadata:
+      labels:
+        app: cloudflare-ddns-updater-k8s-cronjob
+      annotations:
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: 'cloudflare-ddns-updater-k8s-cronjob-dev'
+        vault.hashicorp.com/agent-pre-populate-only: 'true'
+        vault.hashicorp.com/agent-inject-secret-env-config: 'kv/cloudflare-ddns-updater-k8s-cronjob-dev'
+        vault.hashicorp.com/agent-inject-template-env-config: |
+           {{ with secret "kv/cloudflare-ddns-updater-k8s-cronjob-dev" -}}
+              {{- range $key, $value := .Data.data }}
+                export {{ $key }}="{{ $value }}"
+              {{- end }}
+            {{- end }}
+    spec:
+      serviceAccountName: cloudflare-ddns-updater-k8s-cronjob-dev-auth
+      containers:
+        - name: cloudflare-ddns-updater-k8s-cronjob
+          image: ideavn/cloudflare-ddns-updater-k8s-cronjob:{latest}
+          resources:
+            limits:
+              cpu: 200m
+              memory: 300Mi
+            requests:
+              cpu: 50m
+              memory: 256Mi
