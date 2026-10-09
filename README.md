@@ -27,6 +27,7 @@ Click Countine, after remove all Domain:
 <img width="1697" height="633" alt="image" src="https://github.com/user-attachments/assets/ee1154b9-d9a6-4627-a9a0-c875c5892c2a" />
 
 Add key-value Environment variables: CF_ZONE_ID, CF_API_TOKEN, and CF_RECORD_NAME.
+<img width="1702" height="738" alt="image" src="https://github.com/user-attachments/assets/d73afe11-a6f1-45d7-8549-c9ea13990362" />
 
 Finish DEPLOY
 
