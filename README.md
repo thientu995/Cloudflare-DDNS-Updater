@@ -22,3 +22,12 @@ Add Project -> Public Git repository:
 
 Change Build pack to Dockerfile:
 <img width="1677" height="435" alt="image" src="https://github.com/user-attachments/assets/90f6f8bd-e816-4329-b44b-ccec214d2f8e" />
+
+Click Countine, after remove all Domain:
+<img width="1697" height="633" alt="image" src="https://github.com/user-attachments/assets/ee1154b9-d9a6-4627-a9a0-c875c5892c2a" />
+
+Add key-value Environment variables: CF_ZONE_ID, CF_API_TOKEN, and CF_RECORD_NAME.
+
+Finish DEPLOY
+
+Test: restart vps auto gen IP
